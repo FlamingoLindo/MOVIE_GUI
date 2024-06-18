@@ -10,8 +10,17 @@ from dotenv import load_dotenv
 import os
 import random
 import pyautogui
+import sys
 
-load_dotenv()
+def get_base_path():
+    # Get the base path for PyInstaller bundled app
+    if hasattr(sys, '_MEIPASS'):
+        return sys._MEIPASS
+    else:
+        return os.path.abspath(".")
+
+# Load environment variables from .env file
+load_dotenv(os.path.join(get_base_path(), '.env'))
 
 def get_user_input(prompt):
     root = tk.CTk()
@@ -22,7 +31,6 @@ def get_user_input(prompt):
     return user_input
 
 def create_affiliate_account_func():
-    
     # Create a CPF (it might not be valid sometimes)
     def gera_cpf():
         cpf = [random.randint(0, 9) for _ in range(9)]
@@ -64,9 +72,9 @@ def create_affiliate_account_func():
                 return cpf
 
     # Path to your ChromeDriver
-    driver_path = './chromedriver.exe'
+    driver_path = os.path.join(get_base_path(), 'chromedriver.exe')
     s = Service(driver_path)
-    driver = webdriver.Chrome(service=s)  
+    driver = webdriver.Chrome(service=s)
 
     # Open the web page
     driver.get(os.getenv('MOVIE_URL'))
@@ -102,7 +110,7 @@ def create_affiliate_account_func():
     new_aff = wait.until(EC.element_to_be_clickable((By.XPATH, '//*[@id="__next"]/main/div[2]/section/div[2]/div[2]/div[1]/a')))
     new_aff.click()
 
-    email = get_user_input("Affiliate's email addres")
+    email = get_user_input("Affiliate's email address")
     email_input = wait.until(EC.element_to_be_clickable((By.XPATH, '//*[@id="__next"]/main/div[2]/form/div/div[1]/div[2]/label/div/input')))
     email_input.send_keys(email)
     time.sleep(0.2)

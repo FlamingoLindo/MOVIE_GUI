@@ -8,7 +8,7 @@ class Menu_window:
     def __init__(self, master):
         self.master = master
         self.master.title("Menu")
-        self.master.iconbitmap(".\\Icons\\aaaaa.ico")
+        #self.master.iconbitmap(".\\Icons\\aaaaa.ico")
         self.label = CTkLabel(master, text="Choose the project", font=("Arial", 20, "bold"))
         
         self.company_btn = CTkButton(master, text="COMPANY", command=self.open_company_page)

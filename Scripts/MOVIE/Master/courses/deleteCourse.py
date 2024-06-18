@@ -10,8 +10,18 @@ from dotenv import load_dotenv
 import os
 import random
 import pyautogui
-
+import sys
 load_dotenv()
+
+def get_base_path():
+    # Get the base path for PyInstaller bundled app
+    if hasattr(sys, '_MEIPASS'):
+        return sys._MEIPASS
+    else:
+        return os.path.abspath(".")
+    
+# Load environment variables from .env file
+load_dotenv(os.path.join(get_base_path(), '.env'))
 
 def get_user_input(prompt):
     root = tk.CTk()
@@ -23,7 +33,7 @@ def get_user_input(prompt):
 
 def delete_course_func():
     # Path to your ChromeDriver
-    driver_path = './chromedriver.exe'
+    driver_path = os.path.join(get_base_path(), 'chromedriver.exe')
     s = Service(driver_path)
     driver = webdriver.Chrome(service=s)  
 
@@ -51,16 +61,6 @@ def delete_course_func():
 
 
     for i in range(999999999):
-        print("""
-                      __     __     __           __
-                 ____/ /__  / /__  / /____  ____/ /
-                / __  / _ \/ / _ \/ __/ _ \/ __  /
-               / /_/ /  __/ /  __/ /_/  __/ /_/ /
-               \__,_/\___/_/\___/\__/\___/\__,_/
-
-
-                """)
-        print(f"Iteration number: {i + 1} 🥸👍")
         wait = WebDriverWait(driver, 10)  # Wait up to 10 seconds
         third_button = wait.until(EC.presence_of_element_located(
             (By.XPATH, '//div[@data-com="ButtonContainer"]/button[last()]')

@@ -10,7 +10,18 @@ import random
 import time
 from dotenv import load_dotenv
 import os
+import sys
 load_dotenv()
+
+def get_base_path():
+    # Get the base path for PyInstaller bundled app
+    if hasattr(sys, '_MEIPASS'):
+        return sys._MEIPASS
+    else:
+        return os.path.abspath(".")
+    
+# Load environment variables from .env file
+load_dotenv(os.path.join(get_base_path(), '.env'))
 
 # Create a CPF (it might not be valid sometimes)
 def gera_cpf():
@@ -58,7 +69,7 @@ def create_affiliate_request_func():
     print(df)
 
     # Path to your ChromeDriver
-    driver_path = './chromedriver.exe'
+    driver_path = os.path.join(get_base_path(), 'chromedriver.exe')
     s = Service(driver_path)
     driver = webdriver.Chrome(service=s)  
 

@@ -10,8 +10,18 @@ from dotenv import load_dotenv
 import os
 import random
 import pyautogui
-
+import sys
 load_dotenv()
+
+def get_base_path():
+    # Get the base path for PyInstaller bundled app
+    if hasattr(sys, '_MEIPASS'):
+        return sys._MEIPASS
+    else:
+        return os.path.abspath(".")
+    
+# Load environment variables from .env file
+load_dotenv(os.path.join(get_base_path(), '.env'))
 
 def get_user_input(prompt):
     root = tk.CTk()
@@ -22,11 +32,6 @@ def get_user_input(prompt):
     return user_input
 
 def preparig_master_account_func():
-    
-    #fullName = get_user_input("Company's full name")
-    #phoneNumber = get_user_input("Company's phone-number(only numbers)")
-    
-    # Create a CPF (it might not be valid sometimes)
     def gera_cpf():
         cpf = [random.randint(0, 9) for _ in range(9)]
         soma1 = sum(x * y for x, y in zip(cpf, range(10, 1, -1)))
@@ -67,7 +72,7 @@ def preparig_master_account_func():
                 return cpf
 
     # Path to your ChromeDriver
-    driver_path = './chromedriver.exe'
+    driver_path = os.path.join(get_base_path(), 'chromedriver.exe')
     s = Service(driver_path)
     driver = webdriver.Chrome(service=s)  
 

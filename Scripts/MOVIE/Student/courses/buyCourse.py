@@ -10,8 +10,18 @@ from dotenv import load_dotenv
 import os
 import random
 import pyautogui
-
+import sys
 load_dotenv()
+
+def get_base_path():
+    # Get the base path for PyInstaller bundled app
+    if hasattr(sys, '_MEIPASS'):
+        return sys._MEIPASS
+    else:
+        return os.path.abspath(".")
+    
+# Load environment variables from .env file
+load_dotenv(os.path.join(get_base_path(), '.env'))
 
 def get_user_input(prompt):
     root = tk.CTk()
@@ -24,7 +34,7 @@ def get_user_input(prompt):
 def buy_course_func():
 
     # Path to your ChromeDriver
-    driver_path = './chromedriver.exe'
+    driver_path = os.path.join(get_base_path(), 'chromedriver.exe')
     s = Service(driver_path)
     driver = webdriver.Chrome(service=s)  
 
