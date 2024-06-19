@@ -44,6 +44,16 @@ def create_app_pub_input_func():
     def add_class():
         class_click = wait.until(EC.element_to_be_clickable
                                  ((By.XPATH, '//*[@id="__next"]/main/div[2]/a/img'))).click()
+        
+    def pick_module():
+        module_input = get_user_input("Choose the module (1,2,3,..)")
+        if module_input == "1":
+            pass
+        module_dropdown = wait.until(EC.element_to_be_clickable
+                                ((By.XPATH, '//*[@id="__next"]/main/div[2]/div[2]/div/label/div/div'))).click()
+        
+        module_select = wait.until(EC.element_to_be_clickable
+                                   ((By.XPATH, f"//label/div/div[2]/div/div[{module_input}]"))).click()
 
     # Class for doing the finals setps athe concluding the class creation
     def finish_class():
@@ -119,32 +129,36 @@ def create_app_pub_input_func():
         time.sleep(1.2)
 
         # Add banner
-        for _ in range(17):
-            pyautogui.press('tab')
-        pyautogui.press('enter')
-        time.sleep(1.5)
+        banner_input = wait.until(EC.element_to_be_clickable
+                            ((By.XPATH, '//*[@id="mainForm"]/div/label[1]'))).click()
+    
+        time.sleep(1)
         
         banner_img = get_user_input("BANNER IMAGE PATH")
         pyautogui.write(banner_img)
         time.sleep(1)
         pyautogui.press('enter')
 
-        for _ in range(9):
+        aaaaa = wait.until(EC.element_to_be_clickable
+                            ((By.XPATH, '//*[@id="__next"]/main/div[2]/div[2]/div[2]/div/form[2]/div/label/div/input'))).click()
+        time.sleep(0.5)
+        for _ in range(3):
             pyautogui.press('tab')
         pyautogui.press('enter')
-
         time.sleep(1)
 
         # Module name
-        modName = get_user_input("Course module name: ")
-        mod_name = wait.until(EC.element_to_be_clickable
-                            ((By.XPATH, '//*[@id="__next"]/main/div[2]/div[2]/div[2]/div/form[1]/div/label/div/input'))).send_keys(modName)
+        mod_amount_str = get_user_input("How many modules would you like?")
+        mod_amount_int = int(mod_amount_str)
+        for _ in range(mod_amount_int):
+            modName = get_user_input("Course module name: ")
+            mod_name = wait.until(EC.element_to_be_clickable
+                                ((By.XPATH, '//*[@id="__next"]/main/div[2]/div[2]/div[2]/div/form[1]/div/label/div/input'))).send_keys(modName)
 
-        pyautogui.press('tab')
-        pyautogui.press('enter')
+            pyautogui.press('tab')
+            pyautogui.press('enter')
 
         # Select the professor
-
         course_professor = wait.until(EC.element_to_be_clickable
                                     ((By.XPATH, '//*[@id="__next"]/main/div[2]/div[2]/div[2]/div/form[2]/label[1]/div/div'))).click()
         time.sleep(0.6)
@@ -154,7 +168,9 @@ def create_app_pub_input_func():
                                 ((By.XPATH, '//*[@id="__next"]/main/div[2]/div[2]/div[2]/form/button'))).click()
 
         time.sleep(2)
-
+        
+        pick_module()
+        
         # Adds video class
         add_class()
         videoName = get_user_input("Video class name: ")
@@ -177,6 +193,8 @@ def create_app_pub_input_func():
 
         finish_class()
 
+        pick_module()
+
         # Adds text class
         add_class()
 
@@ -196,6 +214,8 @@ def create_app_pub_input_func():
                         ((By.XPATH, '//*[@id="__next"]/main/div[2]/div/div[2]/section/div/div/div/div[2]/label/textarea'))).send_keys(textText)
 
         finish_class()
+
+        pick_module()
 
         # Adds image class
         add_class()
@@ -218,6 +238,8 @@ def create_app_pub_input_func():
                                 ((By.XPATH, '//*[@id="__next"]/main/div[2]/div/div[2]/section/div/div/div/div[2]/div/button[2]'))).click()
 
         finish_class()
+
+        pick_module()
 
         # Adds audio class
         add_class()
@@ -247,6 +269,8 @@ def create_app_pub_input_func():
         time.sleep(2)
         
         finish_class()
+
+        pick_module()
 
         # Adds file class
         add_class()
@@ -278,6 +302,8 @@ def create_app_pub_input_func():
         
         finish_class()
 
+        pick_module()
+
         # Adds code class (Its a really janky, since for some reason selenium does not want to find the code space and type on it)
         add_class()
 
@@ -303,6 +329,8 @@ def create_app_pub_input_func():
         pyautogui.write(codeText)
 
         finish_class()
+
+        pick_module()
 
         # Adds choices class
         add_class()
@@ -342,6 +370,8 @@ def create_app_pub_input_func():
 
         finish_class()
 
+        pick_module()
+
         # Adds dissertative class
         add_class()
 
@@ -361,6 +391,8 @@ def create_app_pub_input_func():
                                 ((By.XPATH, '//*[@id="__next"]/main/div[2]/div/div[2]/section/div/div/div/div[2]/label/textarea'))).send_keys(dissText)
         
         finish_class()
+
+        pick_module()
 
         # Adds essay class
         add_class()

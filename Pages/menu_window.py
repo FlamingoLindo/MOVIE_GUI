@@ -1,3 +1,5 @@
+import sys
+import os
 from customtkinter import *
 from Pages.MOVIE.company_window import CompanyWindow
 from Pages.MOVIE.student_window import StudentWindow
@@ -8,9 +10,18 @@ class Menu_window:
     def __init__(self, master):
         self.master = master
         self.master.title("Menu")
-        #self.master.iconbitmap(".\\Icons\\aaaaa.ico")
-        self.label = CTkLabel(master, text="Choose the project", font=("Arial", 20, "bold"))
-        
+
+        # Load the icon
+        # Get the base path for PyInstaller bundled app
+        if hasattr(sys, '_MEIPASS'):
+            base_path = sys._MEIPASS
+        else:
+            base_path = os.path.abspath(".")
+
+        icon_path = os.path.join(base_path, "Icons", "movie.ico")
+        self.master.iconbitmap(icon_path)
+        self.label = CTkLabel(master, text="Choose the platform", font=("Arial", 20, "bold"))
+
         self.company_btn = CTkButton(master, text="COMPANY", command=self.open_company_page)
         self.student_btn = CTkButton(master, text="STUDENT", command=self.open_student_page)
         self.professor_btn = CTkButton(master, text="PROFESSOR", command=self.open_professor_page)
@@ -23,28 +34,25 @@ class Menu_window:
         self.professor_btn.grid(row=2, column=0, padx=20, pady=20, sticky="nsew")
         self.affiliate_btn.grid(row=2, column=2, padx=20, pady=20, sticky="nsew")
 
-    def hide(self):
-        self.label.grid_forget()
-        self.company_btn.grid_forget()
-        self.student_btn.grid_forget()
-        self.professor_btn.grid_forget()
-        self.affiliate_btn.grid_forget()
-
     def open_company_page(self):
-        self.master.withdraw()  # Hide the main window
-        CompanyWindow(self.master)  # Create and display the GeneralWindow instance
+        self.open_new_window(CompanyWindow)
 
     def open_student_page(self):
-        self.master.withdraw()
-        StudentWindow(self.master)
-        
+        self.open_new_window(StudentWindow)
+
     def open_professor_page(self):
-        self.master.withdraw()
-        ProfessorWindow(self.master)
-        
+        self.open_new_window(ProfessorWindow)
+
     def open_affiliate_page(self):
+        self.open_new_window(AffiliateWindow)
+
+    def open_new_window(self, window_class):
         self.master.withdraw()
-        AffiliateWindow(self.master)
+        new_window = window_class(self.master, self.on_new_window_close)
+        new_window.window.protocol("WM_DELETE_WINDOW", new_window.on_close)
+
+    def on_new_window_close(self):
+        self.master.deiconify()
 
 def setup_window(master):
     menu_window = Menu_window(master)

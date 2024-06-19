@@ -16,6 +16,7 @@ from Scripts.MOVIE.Master.account.fullAccountCreation import full_account_creati
 from Scripts.MOVIE.Student.account.createAccount import create_student_account_func
 from Scripts.MOVIE.Student.account.preparingAccount import prep_account_client_func
 from Scripts.MOVIE.Student.courses.buyCourse import buy_course_func
+from Scripts.MOVIE.Student.courses.doCourse import do_course_func
 
 # MOVIE PROFESSOR
 from Scripts.MOVIE.Professor.account.createAccount import create_account_professor

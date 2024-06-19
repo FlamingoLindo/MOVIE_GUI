@@ -1,13 +1,15 @@
-import pandas as pd
+import customtkinter as tk
+from tkinter import simpledialog
 from selenium import webdriver
 from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.by import By
-import pyautogui
 import time
 from dotenv import load_dotenv
 import os
+import random
+import pyautogui
 import sys
 load_dotenv()
 
@@ -20,6 +22,14 @@ def get_base_path():
     
 # Load environment variables from .env file
 load_dotenv(os.path.join(get_base_path(), '.env'))
+
+def get_user_input(prompt):
+    root = tk.CTk()
+    root.withdraw()  # Hide the main window
+
+    user_input = simpledialog.askstring("Input", prompt)
+
+    return user_input
 
 def create_course_func():
     # Path to your ChromeDriver
@@ -60,12 +70,14 @@ def create_course_func():
     time.sleep(2)
 
     # Wait for email input to be clickable
-    email_input = wait.until(EC.element_to_be_clickable((By.XPATH, '//*[@id="__next"]/main/div/main/form/div[2]/div[1]/label/input')))
-    email_input.send_keys(os.getenv("MOVIE_LOGIN"))
+    email = get_user_input("Company's email")
+    email_input = wait.until(EC.element_to_be_clickable
+                             ((By.XPATH, '//*[@id="__next"]/main/div/main/form/div[2]/div[1]/label/input'))).send_keys(email)
 
     # Wait for password input to be clickable
-    password_input = wait.until(EC.element_to_be_clickable((By.XPATH, '//*[@id="__next"]/main/div/main/form/div[2]/div[2]/label/input')))
-    password_input.send_keys(os.getenv("MOVIE_PASSWORD"))
+    password = get_user_input("Company's password")
+    password_input = wait.until(EC.element_to_be_clickable
+                                ((By.XPATH, '//*[@id="__next"]/main/div/main/form/div[2]/div[2]/label/input'))).send_keys(password)
     pyautogui.press('enter')
 
     # Course creation
@@ -105,11 +117,12 @@ def create_course_func():
         pyautogui.press('tab')
     pyautogui.press('enter')
     time.sleep(1.5)
+    banner_img = get_user_input("BANNER IMAGE PATH")
     pyautogui.write(banner_img)
     time.sleep(1)
     pyautogui.press('enter')
 
-    for _ in range(8):
+    for _ in range(9):
         pyautogui.press('tab')
     pyautogui.press('enter')
 
@@ -121,11 +134,15 @@ def create_course_func():
     pyautogui.press('enter')
 
     # Select the professor
-    course_professor = wait.until(EC.element_to_be_clickable((By.XPATH, '//*[@id="__next"]/main/div[2]/div[2]/div[2]/div/form[2]/label[1]/div/div')))
-    course_professor.click()
-    course_professor_option = wait.until(EC.element_to_be_clickable((By.XPATH, f"//div[contains(text(), 'Funcionário Novo 1')]")))
-    course_professor_option.click()
-    pyautogui.press('enter')
+    course_professor = wait.until(EC.element_to_be_clickable
+                                    ((By.XPATH, '//*[@id="__next"]/main/div[2]/div[2]/div[2]/div/form[2]/label[1]/div/div'))).click()
+    time.sleep(0.6)
+    course_professor_option = wait.until(EC.element_to_be_clickable
+                                    ((By.XPATH, "//div[@id='react-select-3-listbox']/div/div"))).click()
+    nextPage_btn = wait.until(EC.element_to_be_clickable
+                                ((By.XPATH, '//*[@id="__next"]/main/div[2]/div[2]/div[2]/form/button'))).click()
+
+    time.sleep(2)
 
     # Adds video class
     add_class()

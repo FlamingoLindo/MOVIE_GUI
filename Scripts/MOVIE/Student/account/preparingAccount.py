@@ -95,6 +95,9 @@ def prep_account_client_func():
     password_input.send_keys(password)
     pyautogui.press('enter')
 
+    a = wait.until(EC.element_to_be_clickable
+                            ((By.XPATH, '//*[@id="modal-root"]/div[2]/div/div/div[3]/div[2]/button'))).click()
+
     time.sleep(3)
 
     driver.get('https://usuario-mestreseducacao.vercel.app/profile/general')
