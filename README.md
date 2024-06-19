@@ -8,6 +8,7 @@ IF IT DOES NOT WORK YOU ARE GOING TO HAVE TO PASTE THE LINE BELOW AND PASTE IT I
 
 pip install customtkinter tkinter selenium python-dotenv pyautogui pandas
 
+also you might have to install the driver yourself (I'm still figuring it out)
 
 ![buh](https://github.com/FlamingoLindo/MOVIE_GUI/assets/101421364/ac28ee4d-4ab2-4706-9bb7-18459fddaa57)
 
