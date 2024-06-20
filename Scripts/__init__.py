@@ -11,6 +11,7 @@ from Scripts.MOVIE.Master.imports.affiliates import import_affiliate_list_func
 from Scripts.MOVIE.Master.imports.aluno import import_student_list_func
 from Scripts.MOVIE.Master.imports.teacher import import_teacher_list_func
 from Scripts.MOVIE.Master.account.fullAccountCreation import full_account_creation_master
+from Scripts.MOVIE.Master.imports.set_excel_paths import set_paths
 
 # MOVIE STUDENT
 from Scripts.MOVIE.Student.account.createAccount import create_student_account_func

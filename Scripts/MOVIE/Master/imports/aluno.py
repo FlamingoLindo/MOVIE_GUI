@@ -74,7 +74,7 @@ def import_student_list_func():
                 return cpf
 
     # Load the Excel file
-    df = pd.read_excel(r'C:\Users\josef\Desktop\AfterLifeDeath\UMC\Scripts\MOVIE\Master\imports\Files\import_students.xlsx')
+    df = pd.read_excel(os.getenv(r'STU_PATH'))
     print(df)
 
     # Path to your ChromeDriver

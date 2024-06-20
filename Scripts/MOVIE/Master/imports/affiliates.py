@@ -74,7 +74,7 @@ def import_affiliate_list_func():
                 return cpf
 
     # Load the Excel file
-    df = pd.read_excel(r'C:\Users\josef\Desktop\AfterLifeDeath\UMC\Scripts\MOVIE\Master\imports\Files\import_affiliates.xlsx')
+    df = pd.read_excel(os.getenv(r'AFF_PATH'))
     print(df)
 
     # Path to your ChromeDriver
