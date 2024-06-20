@@ -112,7 +112,7 @@ def create_app_pub_input_func():
                                 ((By.XPATH, '//*[@id="__next"]/main/div[2]/div[2]/div[2]/div/form[1]/label/div/label/textarea'))).send_keys(courseDescription)
         
         # Inputs course category
-        courseCategory = get_user_input("Course category (Mais Vistos, Melhores, Avaliados, Top de Vendas, Novos): ")
+        courseCategory = get_user_input("Course category (Mais Vistos, Melhores Avaliados, Top de Vendas, Novos): ")
         course_category = wait.until(EC.element_to_be_clickable
                                     ((By.XPATH, '//*[@id="mainForm"]/div/label[2]/div/div'))).click()
         time.sleep(0.5)
@@ -120,11 +120,17 @@ def create_app_pub_input_func():
                                             ((By.XPATH, f"//div[contains(text(), '{courseCategory}')]"))).click()
 
         # Tags 
-        courseTag = get_user_input("Course tag: ")
-        tags = wait.until(EC.element_to_be_clickable
-                        ((By.XPATH, '//*[@id="__next"]/main/div[2]/div[2]/div[2]/div/form[2]/div/label/div/input'))).send_keys(courseTag)
-        tags_send = wait.until(EC.element_to_be_clickable
-                            ((By.XPATH, '//*[@id="__next"]/main/div[2]/div[2]/div[2]/div/form[2]/div/label/div/div/button'))).click()
+        tag_amount_str = get_user_input("How many tags?")
+        tag_amount_int = int(tag_amount_str)
+        
+        for _ in range (tag_amount_int):
+            courseTag = get_user_input("Course tag: ")
+            tags = wait.until(EC.element_to_be_clickable
+                            ((By.XPATH, '//*[@id="__next"]/main/div[2]/div[2]/div[2]/div/form[2]/div/label/div/input')
+                             )).send_keys(courseTag)
+            tags_send = wait.until(EC.element_to_be_clickable
+                                ((By.XPATH, '//*[@id="__next"]/main/div[2]/div[2]/div[2]/div/form[2]/div/label/div/div/button')
+                                 )).click()
 
         time.sleep(1.2)
 
@@ -167,9 +173,10 @@ def create_app_pub_input_func():
         nextPage_btn = wait.until(EC.element_to_be_clickable
                                 ((By.XPATH, '//*[@id="__next"]/main/div[2]/div[2]/div[2]/form/button'))).click()
 
-        time.sleep(2)
+
         
         pick_module()
+        
         
         # Adds video class
         add_class()
@@ -180,21 +187,29 @@ def create_app_pub_input_func():
         videoDesc = get_user_input("Video class description: ")
         class_desc = wait.until(EC.element_to_be_clickable
                                 ((By.XPATH, '//*[@id="__next"]/main/div[2]/div/div[1]/div[3]/label/div/label/textarea'))).send_keys(videoDesc)
-
-        video_btn = wait.until(EC.element_to_be_clickable
-                            ((By.XPATH, '//*[@id="__next"]/main/div[2]/div/div[3]/div[2]/button[1]/div'))).click()
-
-        videoURL = get_user_input("Video URL: ")
-        video_url = wait.until(EC.element_to_be_clickable
-                            ((By.XPATH, '//*[@id="__next"]/main/div[2]/div/div[2]/section/div/div/div/div[2]/input'))).send_keys(videoURL)
         
-        video_search = wait.until(EC.element_to_be_clickable
-                                ((By.XPATH, '//*[@id="__next"]/main/div[2]/div/div[2]/section/div/div/div/div[2]/div/button[2]'))).click()
+        video_amount_str = get_user_input("How many videos")
+        video_amount_int = int(video_amount_str)
+        video = 1
+        for _ in range (video_amount_int):
+            video_btn = wait.until(EC.element_to_be_clickable
+                                ((By.XPATH, '//*[@id="__next"]/main/div[2]/div/div[3]/div[2]/button[1]/div'))).click()
 
+            videoURL = get_user_input("Video URL: ")
+            video_url = wait.until(EC.element_to_be_clickable
+                                ((By.XPATH, f'//*[@id="__next"]/main/div[2]/div/div[2]/section[{video}]/div/div/div/div[2]/input')
+                                 )).send_keys(videoURL)
+            
+            video_search = wait.until(EC.element_to_be_clickable
+                                    ((By.XPATH, f'//*[@id="__next"]/main/div[2]/div/div[2]/section[{video}]/div/div/div/div[2]/div/button[2]')
+                                     )).click()
+            video += 1
+            
         finish_class()
 
         pick_module()
 
+        
         # Adds text class
         add_class()
 
@@ -206,12 +221,18 @@ def create_app_pub_input_func():
         class_desc = wait.until(EC.element_to_be_clickable
                                 ((By.XPATH, '//*[@id="__next"]/main/div[2]/div/div[1]/div[3]/label/div/label/textarea'))).send_keys(textDesc)
 
-        text_btn = wait.until(EC.element_to_be_clickable
-                            ((By.XPATH, '//*[@id="__next"]/main/div[2]/div/div[3]/div[2]/button[2]/div'))).click()
-        
-        textText = get_user_input("Text class text: ")
-        text = wait.until(EC.element_to_be_clickable
-                        ((By.XPATH, '//*[@id="__next"]/main/div[2]/div/div[2]/section/div/div/div/div[2]/label/textarea'))).send_keys(textText)
+        text_amount_str = get_user_input("How many text blocks")
+        text_amount_int = int(text_amount_str)
+        text_ = 1
+        for _ in range (text_amount_int):
+            text_btn = wait.until(EC.element_to_be_clickable
+                                ((By.XPATH, '//*[@id="__next"]/main/div[2]/div/div[3]/div[2]/button[2]/div'))).click()
+
+            textText = get_user_input("Text class text: ")
+            text = wait.until(EC.element_to_be_clickable
+                            ((By.XPATH, f'//*[@id="__next"]/main/div[2]/div/div[2]/section[{text_}]/div/div/div/div[2]/label/textarea')
+                             )).send_keys(textText)
+            text_ += 1
 
         finish_class()
 
@@ -221,52 +242,69 @@ def create_app_pub_input_func():
         add_class()
         imageName = get_user_input("Image class name: ")
         class_name = wait.until(EC.element_to_be_clickable
-                                ((By.XPATH, '//*[@id="__next"]/main/div[2]/div/div[1]/div[2]/label/div/input'))).send_keys(imageName)
+                                ((By.XPATH, '//*[@id="__next"]/main/div[2]/div/div[1]/div[2]/label/div/input')
+                                )).send_keys(imageName)
 
         imgaeDesc = get_user_input("Image class description: ")
         class_desc = wait.until(EC.element_to_be_clickable
-                                ((By.XPATH, '//*[@id="__next"]/main/div[2]/div/div[1]/div[3]/label/div/label/textarea'))).send_keys(imgaeDesc)
+                                ((By.XPATH, '//*[@id="__next"]/main/div[2]/div/div[1]/div[3]/label/div/label/textarea')
+                                )).send_keys(imgaeDesc)
 
-        image_btn = wait.until(EC.element_to_be_clickable
-                            ((By.XPATH, '//*[@id="__next"]/main/div[2]/div/div[3]/div[2]/button[3]/div'))).click()
+        image_amount_str = get_user_input("How many images")
+        image_amount_int = int(image_amount_str)
+        image = 1
+        for _ in range (image_amount_int):
+            image_btn = wait.until(EC.element_to_be_clickable
+                                ((By.XPATH, '//*[@id="__next"]/main/div[2]/div/div[3]/div[2]/button[3]/div'))).click()
 
-        imageURL = get_user_input("Image URL: ")
-        image_search = wait.until(EC.element_to_be_clickable
-                                ((By.XPATH, '//*[@id="__next"]/main/div[2]/div/div[2]/section/div/div/div/div[2]/input'))).send_keys(imageURL)
+            imageURL = get_user_input("Image URL: ")
+            image_search = wait.until(EC.element_to_be_clickable
+                                    ((By.XPATH, f'//*[@id="__next"]/main/div[2]/div/div[2]/section[{image}]/div/div/div/div[2]/input')
+                                    )).send_keys(imageURL)
 
-        image_done = wait.until(EC.element_to_be_clickable
-                                ((By.XPATH, '//*[@id="__next"]/main/div[2]/div/div[2]/section/div/div/div/div[2]/div/button[2]'))).click()
+            image_done = wait.until(EC.element_to_be_clickable
+                                    ((By.XPATH, f'//*[@id="__next"]/main/div[2]/div/div[2]/section[{image}]/div/div/div/div[2]/div/button[2]')
+                                    )).click()
+            image += 1
 
         finish_class()
 
         pick_module()
 
+        
         # Adds audio class
         add_class()
 
         audioName = get_user_input("Audio class name: ")
         class_name = wait.until(EC.element_to_be_clickable
-                                ((By.XPATH, '//*[@id="__next"]/main/div[2]/div/div[1]/div[2]/label/div/input'))).send_keys(audioName)
-        
+                                ((By.XPATH, '//*[@id="__next"]/main/div[2]/div/div[1]/div[2]/label/div/input')
+                                )).send_keys(audioName)
+            
         audioDesc = get_user_input("Audio class description: ")
         class_desc = wait.until(EC.element_to_be_clickable
-                                ((By.XPATH, '//*[@id="__next"]/main/div[2]/div/div[1]/div[3]/label/div/label/textarea'))).send_keys(audioDesc)
-        
+                                ((By.XPATH, '//*[@id="__next"]/main/div[2]/div/div[1]/div[3]/label/div/label/textarea')
+                                )).send_keys(audioDesc)
+            
+        #audio_amount_str = get_user_input("How many audios")
+        #audio_amount_int = int(audio_amount_str)
+        audio_num = 1
+        #for _ in range (audio_amount_int):    
         audio_btn = wait.until(EC.element_to_be_clickable
-                            ((By.XPATH, '//*[@id="__next"]/main/div[2]/div/div[3]/div[2]/button[4]/div'))).click()
+                               ((By.XPATH, '//*[@id="__next"]/main/div[2]/div/div[3]/div[2]/button[4]/div'))).click()
 
         audio_path = get_user_input("Audio path: ")
         audio_search = wait.until(EC.element_to_be_clickable
-                                ((By.XPATH, '//*[@id="__next"]/main/div[2]/div/div[2]/section/div/div/div/div[1]/label/div/input')
-                                )).send_keys("Audio")
-        time.sleep(0.5)
-        pyautogui.press('tab')
-        pyautogui.press('tab')
+                                ((By.XPATH, f'//*[@id="__next"]/main/div[2]/div/div[2]/section/div/div/div/div[1]/label/div/input')
+                                )).send_keys(f"Audio {audio_num}")
+            
+        for _ in range(2):
+            pyautogui.press('tab')
         pyautogui.press('enter')
         time.sleep(1.5)
         pyautogui.write(audio_path)
         pyautogui.press('enter')
-        time.sleep(2)
+        time.sleep(1)
+        audio_num + 1
         
         finish_class()
 
@@ -277,28 +315,36 @@ def create_app_pub_input_func():
 
         docName = get_user_input("Document class name: ")
         class_name = wait.until(EC.element_to_be_clickable
-                                ((By.XPATH, '//*[@id="__next"]/main/div[2]/div/div[1]/div[2]/label/div/input'))).send_keys(docName)
+                                ((By.XPATH, '//*[@id="__next"]/main/div[2]/div/div[1]/div[2]/label/div/input')
+                                 )).send_keys(docName)
 
         docDesc = get_user_input("Document class description: ")
         class_desc = wait.until(EC.element_to_be_clickable
-                                ((By.XPATH, '//*[@id="__next"]/main/div[2]/div/div[1]/div[3]/label/div/label/textarea'))).send_keys(docDesc)
+                                ((By.XPATH, '//*[@id="__next"]/main/div[2]/div/div[1]/div[3]/label/div/label/textarea')
+                                 )).send_keys(docDesc)
     
-        document_btn = wait.until(EC.element_to_be_clickable
-                                ((By.XPATH, '//*[@id="__next"]/main/div[2]/div/div[3]/div[2]/button[5]/div'))).click()
+        file_amount_str = get_user_input("How many document blocks?")
+        file_amount_int = int(file_amount_str)
+        file = 1 
+        for _ in range (file_amount_int):
+            document_btn = wait.until(EC.element_to_be_clickable
+                                    ((By.XPATH, '//*[@id="__next"]/main/div[2]/div/div[3]/div[2]/button[5]/div'))).click()
 
-        document_path = get_user_input("File path           ")
-        file_click = wait.until(EC.element_to_be_clickable
-                                ((By.XPATH, '//*[@id="__next"]/main/div[2]/div/div[2]/section/div/div/div/div[1]/label/div/input')
-                                )).send_keys("File")
-        
-        time.sleep(0.5)
-        pyautogui.press('tab')
-        pyautogui.press('tab')
-        pyautogui.press('enter')
-        time.sleep(1.5)
-        pyautogui.write(document_path)
-        pyautogui.press('enter')
-        time.sleep(2)
+            document_path = get_user_input("File path           ")
+            file_click = wait.until(EC.element_to_be_clickable
+                                    ((By.XPATH, f'//*[@id="__next"]/main/div[2]/div/div[2]/section[{file}]/div/div/div/div[1]/label/div/input')
+                                    )).send_keys("File")
+            
+            time.sleep(0.5)
+            pyautogui.press('tab')
+            pyautogui.press('tab')
+            pyautogui.press('enter')
+            time.sleep(1.5)
+            pyautogui.write(document_path)
+            pyautogui.press('enter')
+            time.sleep(2)
+            
+            file += 1
         
         finish_class()
 
@@ -315,18 +361,25 @@ def create_app_pub_input_func():
         class_desc = wait.until(EC.element_to_be_clickable
                                 ((By.XPATH, '//*[@id="__next"]/main/div[2]/div/div[1]/div[3]/label/div/label/textarea'))).send_keys(codeDesc)
 
-        code_btn = wait.until(EC.element_to_be_clickable
-                            ((By.XPATH, '//*[@id="__next"]/main/div[2]/div/div[3]/div[2]/button[6]/div'))).click()
+        code_amount_str = get_user_input("How many code blocks?")
+        code_amount_int = int(code_amount_str)
+        code = 1 
+        for _ in range (code_amount_int):
+            code_btn = wait.until(EC.element_to_be_clickable
+                                ((By.XPATH, '//*[@id="__next"]/main/div[2]/div/div[3]/div[2]/button[6]/div'))).click()
 
-        janky_solution = wait.until(EC.element_to_be_clickable
-                                    ((By.XPATH, '//*[@id="__next"]/main/div[2]/div/div[2]/section/div/div/div/div[1]/label/div/input'))).click()
+            janky_solution = wait.until(EC.element_to_be_clickable
+                                        ((By.XPATH, f'//*[@id="__next"]/main/div[2]/div/div[2]/section[{code}]/div/div/div/div[1]/label/div/input')
+                                         )).click()
 
-        get_user_input("Alt Tab now!")
-        pyautogui.press('tab')
-        pyautogui.press('tab')
-        pyautogui.press('tab')
-        codeText = get_user_input("Code class text: ")
-        pyautogui.write(codeText)
+            #get_user_input("Alt Tab now!")
+            pyautogui.press('tab')
+            pyautogui.press('tab')
+            pyautogui.press('tab')
+            codeText = get_user_input("Code class text: ")
+            pyautogui.write(codeText)
+            
+            code += 1
 
         finish_class()
 
@@ -349,24 +402,24 @@ def create_app_pub_input_func():
         multiple_choices_class_question = wait.until(EC.element_to_be_clickable
                                                     ((By.XPATH, '//*[@id="__next"]/main/div[2]/div/div[2]/section/div/div/div/div[1]/label/div/input'))).send_keys(choicesName)
 
-        alternative1 = wait.until(EC.element_to_be_clickable
-                                ((By.XPATH, '//*[@id="__next"]/main/div[2]/div/div[2]/section/div/div/div/button'))).click()
+        choice_amount_str = get_user_input("How many choices?")
+        choice_amount_int = int(choice_amount_str)
+        choice_ = 1
+        for _ in range (choice_amount_int):
+            alternatives = wait.until(EC.element_to_be_clickable
+                                    ((By.XPATH, '//*[@id="__next"]/main/div[2]/div/div[2]/section/div/div/div/button'))).click()
 
-        alternative2 = wait.until(EC.element_to_be_clickable
-                                ((By.XPATH, '//*[@id="__next"]/main/div[2]/div/div[2]/section/div/div/div/button'))).click()
+            choice = get_user_input("Choice Text")
+            choice_txt = wait.until(EC.element_to_be_clickable
+                                ((By.XPATH, f'//*[@id="__next"]/main/div[2]/div/div[2]/section/div/div/div/div[2]/ul/li[{choice_}]/input')
+                                 )).send_keys(choice)
+            choice_ += 1
 
+        # input the right one?
+        right_input = get_user_input("Which choice is correct? (1,2,3,...)")
         is_right = wait.until(EC.element_to_be_clickable
-                            ((By.XPATH, '//*[@id="__next"]/main/div[2]/div/div[2]/section/div/div/div/div[2]/ul/li[1]/div[2]/label[1]/div'))).click()
-
-        choice1 = get_user_input("Choice 1 (right): ")
-        alt_txt1 = wait.until(EC.element_to_be_clickable
-                              ((By.XPATH, '//*[@id="__next"]/main/div[2]/div/div[2]/section/div/div/div/div[2]/ul/li[1]/input')))
-        alt_txt1.send_keys(choice1)
-        
-        choice2 = get_user_input("Choice 2 (wrong): ")
-        alt_txt2 = wait.until(EC.element_to_be_clickable
-                            ((By.XPATH, '//*[@id="__next"]/main/div[2]/div/div[2]/section/div/div/div/div[2]/ul/li[2]/input')))
-        alt_txt2.send_keys(choice2)
+                            ((By.XPATH, f'//*[@id="__next"]/main/div[2]/div/div[2]/section/div/div/div/div[2]/ul/li[{right_input}]/div[2]/label[1]/div')
+                             )).click()
 
         finish_class()
 
@@ -377,19 +430,28 @@ def create_app_pub_input_func():
 
         dissName = get_user_input("Dissertative class name: ")
         class_name = wait.until(EC.element_to_be_clickable
-                                ((By.XPATH, '//*[@id="__next"]/main/div[2]/div/div[1]/div[2]/label/div/input'))).send_keys(dissName)
+                                ((By.XPATH, '//*[@id="__next"]/main/div[2]/div/div[1]/div[2]/label/div/input')
+                                 )).send_keys(dissName)
 
         dissDesc = get_user_input("Dissertative class description: ")
         class_desc = wait.until(EC.element_to_be_clickable
-                                ((By.XPATH, '//*[@id="__next"]/main/div[2]/div/div[1]/div[3]/label/div/label/textarea'))).send_keys(dissDesc)
+                                ((By.XPATH, '//*[@id="__next"]/main/div[2]/div/div[1]/div[3]/label/div/label/textarea')
+                                 )).send_keys(dissDesc)
 
-        dessertative_btn = wait.until(EC.element_to_be_clickable
-                                    ((By.XPATH, '//*[@id="__next"]/main/div[2]/div/div[3]/div[2]/button[8]/div'))).click()
+        diss_amount_str = get_user_input("How many dissertatives text blocks?")
+        diss_amount_int = int(diss_amount_str)
+        diss = 1 
+        for _ in range (code_amount_int):
+            dessertative_btn = wait.until(EC.element_to_be_clickable
+                                        ((By.XPATH, '//*[@id="__next"]/main/div[2]/div/div[3]/div[2]/button[8]/div')
+                                         )).click()
 
-        dissText = get_user_input("Dissertative text: ")
-        text_field = wait.until(EC.element_to_be_clickable
-                                ((By.XPATH, '//*[@id="__next"]/main/div[2]/div/div[2]/section/div/div/div/div[2]/label/textarea'))).send_keys(dissText)
-        
+            dissText = get_user_input("Dissertative text: ")
+            text_field = wait.until(EC.element_to_be_clickable
+                                    ((By.XPATH, f'//*[@id="__next"]/main/div[2]/div/div[2]/section[{diss}]/div/div/div/div[2]/label/textarea')
+                                     )).send_keys(dissText)
+            
+            diss += 1 
         finish_class()
 
         pick_module()
@@ -405,13 +467,21 @@ def create_app_pub_input_func():
         class_desc = wait.until(EC.element_to_be_clickable
                                 ((By.XPATH, '//*[@id="__next"]/main/div[2]/div/div[1]/div[3]/label/div/label/textarea'))).send_keys(essDesc)
 
-        essay_btn = wait.until(EC.element_to_be_clickable
-                            ((By.XPATH, '//*[@id="__next"]/main/div[2]/div/div[3]/div[2]/button[9]/div'))).click()
+        ess_amount_str = get_user_input("How many essays text blocks?")
+        ess_amount_int = int(ess_amount_str)
+        ess = 1 
+        for _ in range (ess_amount_int):
+            essay_btn = wait.until(EC.element_to_be_clickable
+                                ((By.XPATH, '//*[@id="__next"]/main/div[2]/div/div[3]/div[2]/button[9]/div')
+                                 )).click()
 
-        essText = get_user_input("Essay text:")
-        text_field = wait.until(EC.element_to_be_clickable
-                                ((By.XPATH, '//*[@id="__next"]/main/div[2]/div/div[2]/section/div/div/div/div[1]/label/div/input'))).send_keys(essText)
-        
+            essText = get_user_input("Essay text:")
+            text_field = wait.until(EC.element_to_be_clickable
+                                    ((By.XPATH, f'//*[@id="__next"]/main/div[2]/div/div[2]/section[{ess}]/div/div/div/div[1]/label/div/input')
+                                     )).send_keys(essText)
+            
+            ess += 1 
+            
         finish_class()
 
         # Finishes course creation
