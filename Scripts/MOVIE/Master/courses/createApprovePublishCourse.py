@@ -11,6 +11,7 @@ import os
 import random
 import pyautogui
 import sys
+from Scripts.MOVIE.load_paths import load_chromedriver
 load_dotenv()
 
 def get_base_path():
@@ -33,7 +34,7 @@ def get_user_input(prompt):
 
 def create_app_pub_func():
     # Path to your ChromeDriver
-    driver_path = os.path.join(get_base_path(), 'chromedriver.exe')
+    driver_path = load_chromedriver()
     s = Service(driver_path)
     driver = webdriver.Chrome(service=s)  
 

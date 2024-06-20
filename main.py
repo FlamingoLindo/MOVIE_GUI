@@ -1,6 +1,7 @@
 from customtkinter import *
 import Pages.menu_window as menu_window
- 
+
+
 def show_menu():
     menu_window_instance = menu_window.Menu_window(win) 
     menu_window_instance.show()  

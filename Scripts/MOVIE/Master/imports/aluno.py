@@ -12,6 +12,8 @@ import os
 import random
 import pyautogui
 import sys
+from Scripts.MOVIE.load_paths import load_chromedriver
+from Scripts.MOVIE.load_paths import load_stu_xlsx
 load_dotenv()
 
 def get_base_path():
@@ -74,11 +76,11 @@ def import_student_list_func():
                 return cpf
 
     # Load the Excel file
-    df = pd.read_excel(os.getenv(r'STU_PATH'))
+    df = pd.read_excel(load_stu_xlsx())
     print(df)
 
     # Path to your ChromeDriver
-    driver_path = os.path.join(get_base_path(), 'chromedriver.exe')
+    driver_path = load_chromedriver()
     s = Service(driver_path)
     driver = webdriver.Chrome(service=s)  
 

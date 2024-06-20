@@ -2,9 +2,9 @@ import customtkinter
 from customtkinter import *
 from Scripts import *
 
+
 class CompanyWindow:
     def __init__(self, master, on_close_callback):
-        set_paths()
         self.master = master
         self.on_close_callback = on_close_callback
         self.window = CTkToplevel(master)

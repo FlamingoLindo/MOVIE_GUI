@@ -2,8 +2,10 @@ import customtkinter
 from customtkinter import *
 from Scripts import *
 
+
 class ProfessorWindow:
     def __init__(self, master,on_close_callback):
+
         self.master = master
         self.on_close_callback = on_close_callback
         self.window = CTkToplevel(master)

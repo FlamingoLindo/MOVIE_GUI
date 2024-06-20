@@ -11,6 +11,7 @@ import time
 from dotenv import load_dotenv
 import os
 import sys
+from Scripts.MOVIE.load_paths import load_chromedriver
 load_dotenv()
 
 def get_base_path():
@@ -69,7 +70,7 @@ def create_affiliate_request_func():
     print(df)
 
     # Path to your ChromeDriver
-    driver_path = os.path.join(get_base_path(), 'chromedriver.exe')
+    driver_path = load_chromedriver()
     s = Service(driver_path)
     driver = webdriver.Chrome(service=s)  
 

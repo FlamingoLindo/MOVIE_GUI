@@ -11,6 +11,7 @@ import os
 import random
 import pyautogui
 import sys
+from Scripts.MOVIE.load_paths import load_chromedriver
 load_dotenv()
 
 def get_base_path():
@@ -41,7 +42,7 @@ def config_master_func():
     midia_img = r'C:\Users\josef\Desktop\AfterLifeDeath\MovieCreator\autoMovie\banner.jpg'
 
     # Path to your ChromeDriver
-    driver_path = os.path.join(get_base_path(), 'chromedriver.exe')
+    driver_path = load_chromedriver()
     s = Service(driver_path)
     driver = webdriver.Chrome(service=s)  
 

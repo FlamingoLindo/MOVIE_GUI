@@ -10,7 +10,6 @@ class Menu_window:
     def __init__(self, master):
         self.master = master
         self.master.title("Menu")
-
         # Load the icon
         # Get the base path for PyInstaller bundled app
         if hasattr(sys, '_MEIPASS'):

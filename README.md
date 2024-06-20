@@ -12,7 +12,8 @@ also you might have to install the driver yourself (I'm still figuring it out)
 
 ![buh](https://github.com/FlamingoLindo/MOVIE_GUI/assets/101421364/ac28ee4d-4ab2-4706-9bb7-18459fddaa57)
 
-pyinstaller --onefile --add-data "Icons;Icons" --add-data "Pages;Pages" --add-data "Scripts;Scripts" --add-data ".env;." --add-data "chromedriver.exe;." --icon="C:\\Users\\josef\\Desktop\\MOVIE_GUI\\Icons\\movie.ico" --noconsole main.py
+pyinstaller --onefile --add-data "Icons;Icons" --add-data "Pages;Pages" --add-data "Scripts;Scripts" --add-data ".env;." --add-data "Scripts/MOVIE/chromedriver.exe;." --icon="C:\\Users\\josef\\Desktop\\MOVIE_GUI\\Icons\\movie.ico" --noconsole main.py
+
 
 
 
