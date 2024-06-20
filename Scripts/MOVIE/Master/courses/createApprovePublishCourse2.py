@@ -46,14 +46,16 @@ def create_app_pub_input_func():
                                  ((By.XPATH, '//*[@id="__next"]/main/div[2]/a/img'))).click()
         
     def pick_module():
-        module_input = get_user_input("Choose the module (1,2,3,..)")
-        if module_input == "1":
+        if mod_amount_int == 1:
             pass
-        module_dropdown = wait.until(EC.element_to_be_clickable
-                                ((By.XPATH, '//*[@id="__next"]/main/div[2]/div[2]/div/label/div/div'))).click()
-        
-        module_select = wait.until(EC.element_to_be_clickable
-                                   ((By.XPATH, f"//label/div/div[2]/div/div[{module_input}]"))).click()
+        else:
+            module_input = get_user_input("Choose the module (1,2,3,..)")
+            
+            module_dropdown = wait.until(EC.element_to_be_clickable
+                                    ((By.XPATH, '//*[@id="__next"]/main/div[2]/div[2]/div/label/div/div'))).click()
+            
+            module_select = wait.until(EC.element_to_be_clickable
+                                    ((By.XPATH, f"//label/div/div[2]/div/div[{module_input}]"))).click()
 
     # Class for doing the finals setps athe concluding the class creation
     def finish_class():
@@ -100,11 +102,7 @@ def create_app_pub_input_func():
         total_time.clear()
         total_time.send_keys(courseTime)
 
-        # Course name
-        courseName = get_user_input("Course name: ")
-        name = wait.until(EC.element_to_be_clickable
-                        ((By.XPATH, '//*[@id="__next"]/main/div[2]/div[2]/div[2]/div/form[1]/div/label/div/input')))
-        name.send_keys(courseName)
+        
 
         # Description
         courseDescription = get_user_input("Course description: ")
@@ -144,15 +142,14 @@ def create_app_pub_input_func():
         pyautogui.write(banner_img)
         time.sleep(1)
         pyautogui.press('enter')
-
-        aaaaa = wait.until(EC.element_to_be_clickable
-                            ((By.XPATH, '//*[@id="__next"]/main/div[2]/div[2]/div[2]/div/form[2]/div/label/div/input'))).click()
-        time.sleep(0.5)
-        for _ in range(3):
-            pyautogui.press('tab')
+        
+        # Course name
+        courseName = get_user_input("Course name: ")
+        name = wait.until(EC.element_to_be_clickable
+                        ((By.XPATH, '//*[@id="__next"]/main/div[2]/div[2]/div[2]/div/form[1]/div/label/div/input')))
+        name.send_keys(courseName)
         pyautogui.press('enter')
-        time.sleep(1)
-
+        
         # Module name
         mod_amount_str = get_user_input("How many modules would you like?")
         mod_amount_int = int(mod_amount_str)
