@@ -12,6 +12,7 @@ from dotenv import load_dotenv
 import os
 import sys
 from Scripts.MOVIE.load_paths import load_chromedriver
+from Scripts.MOVIE.load_paths import load_aff_xlsx
 load_dotenv()
 
 def get_base_path():
@@ -75,7 +76,7 @@ def create_affiliate_request_func():
     driver = webdriver.Chrome(service=s)  
 
     # Open the web page
-    driver.get('https://afiliado-mestreseducacao.vercel.app/')
+    driver.get(load_aff_xlsx())
 
     # Initialize WebDriverWait
     wait = WebDriverWait(driver, 5)

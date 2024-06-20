@@ -38,9 +38,6 @@ def config_master_func():
         go_back = wait.until(EC.element_to_be_clickable((By.XPATH, '//*[@id="__next"]/main/div[2]/div[1]/header/button')))
         go_back.click()
         
-    # Sets the midia path
-    midia_img = r'C:\Users\josef\Desktop\AfterLifeDeath\MovieCreator\autoMovie\banner.jpg'
-
     # Path to your ChromeDriver
     driver_path = load_chromedriver()
     s = Service(driver_path)
@@ -279,6 +276,7 @@ def config_master_func():
 
     time.sleep(1.5)
 
+    midia_img = get_user_input("Input the midia image path")
     pyautogui.write(midia_img)
     time.sleep(1.3)
     pyautogui.press('enter')
