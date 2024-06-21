@@ -15,6 +15,14 @@ from Scripts.MOVIE.load_paths import load_chromedriver
 from Scripts.MOVIE.load_paths import load_aff_xlsx
 from Scripts.MOVIE.load_paths import load_pro_xlsx
 from Scripts.MOVIE.load_paths import load_stu_xlsx
+from Scripts.MOVIE.Master.configs.subPlan import subscription_plan_func
+from Scripts.MOVIE.Master.configs.category import category_func
+from Scripts.MOVIE.Master.configs.landing_page import landing_page_func
+from Scripts.MOVIE.Master.configs.payment_method import payment_method_func
+from Scripts.MOVIE.Master.configs.coupon import create_coupon_func
+from Scripts.MOVIE.Master.configs.comission import affiliate_comission_func
+from Scripts.MOVIE.Master.configs.class_ import create_class_func
+from Scripts.MOVIE.Master.configs.kit_midia import add_kit_midia_func
 
 # MOVIE STUDENT
 from Scripts.MOVIE.Student.account.createAccount import create_student_account_func

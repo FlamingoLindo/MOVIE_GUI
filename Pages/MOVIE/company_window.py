@@ -9,7 +9,7 @@ class CompanyWindow:
         self.on_close_callback = on_close_callback
         self.window = CTkToplevel(master)
         self.window.title("Company Window")
-        self.window.geometry("500x300")
+        self.window.geometry("500x500")
         
         if hasattr(sys, '_MEIPASS'):
             base_path = sys._MEIPASS
@@ -46,6 +46,30 @@ class CompanyWindow:
         
         self.imp_teach_btn = customtkinter.CTkButton(self.window, text="Import Teacher", fg_color="#144870", hover_color="#08253b", command=self.btn_import_teacher_list)
         self.imp_teach_btn.grid(row=2, column=2, padx=3, pady=20, sticky="nsew")
+        
+        self.sub_plan_btn = customtkinter.CTkButton(self.window, text="Create Sub Plan", fg_color="#144870", hover_color="#08253b", command=self.btn_sub_plan_btn)
+        self.sub_plan_btn.grid(row=3, column=0, padx=3, pady=20, sticky="nsew")
+        
+        self.category_btn = customtkinter.CTkButton(self.window, text="Create Category", fg_color="#144870", hover_color="#08253b", command=self.btn_create_category)
+        self.category_btn.grid(row=3, column=1, padx=3, pady=20, sticky="nsew")
+        
+        self.lading_btn = customtkinter.CTkButton(self.window, text="Create Landing Page", fg_color="#144870", hover_color="#08253b", command=self.btn_create_landing)
+        self.lading_btn.grid(row=3, column=2, padx=3, pady=20, sticky="nsew")
+        
+        self.lading_btn = customtkinter.CTkButton(self.window, text="Change Payment Method", fg_color="#144870", hover_color="#08253b", command=self.btn_payment_method)
+        self.lading_btn.grid(row=4, column=0, padx=3, pady=20, sticky="nsew")
+        
+        self.coupon_btn = customtkinter.CTkButton(self.window, text="Create Coupon", fg_color="#144870", hover_color="#08253b", command=self.btn_create_coupon)
+        self.coupon_btn.grid(row=4, column=1, padx=3, pady=20, sticky="nsew")
+        
+        self.comission_btn = customtkinter.CTkButton(self.window, text="Ajust comission", fg_color="#144870", hover_color="#08253b", command=self.btn_comission)
+        self.comission_btn.grid(row=4, column=2, padx=3, pady=20, sticky="nsew")
+        
+        self.class_btn = customtkinter.CTkButton(self.window, text="Create Class", fg_color="#144870", hover_color="#08253b", command=self.btn_class)
+        self.class_btn.grid(row=5, column=0, padx=3, pady=20, sticky="nsew")
+        
+        self.kit_btn = customtkinter.CTkButton(self.window, text="Add Kit Midia", fg_color="#144870", hover_color="#08253b", command=self.btn_kit_midia)
+        self.kit_btn.grid(row=5, column=1, padx=3, pady=20, sticky="nsew")
     
         # Override the close button
         self.window.protocol("WM_DELETE_WINDOW", self.on_close)    
@@ -55,6 +79,30 @@ class CompanyWindow:
         self.window.destroy()
         
     # COMPANY FUNCITONS
+    def btn_kit_midia(self):
+        add_kit_midia_func()
+        
+    def btn_class(self):
+        create_class_func()
+        
+    def btn_comission(self):
+        affiliate_comission_func()
+        
+    def btn_create_coupon(self):
+        create_coupon_func()
+        
+    def btn_payment_method(self):
+        payment_method_func()
+        
+    def btn_create_landing(self):
+        landing_page_func()
+        
+    def btn_create_category(self):
+        category_func()
+        
+    def btn_sub_plan_btn(self):
+        subscription_plan_func()
+    
     def btn_create_course_auto(self):
         create_course_func()
     
