@@ -20,56 +20,59 @@ class CompanyWindow:
         self.master.iconbitmap(icon_path)
 
         # COMPANY BUTTONS  
-        self.create_account_comp_btn = customtkinter.CTkButton(self.window, text="Create Account", fg_color="#144870", hover_color="#08253b", command=self.btn_create_account_master)
-        self.create_account_comp_btn.grid(row=0, column=0, padx=3, pady=20, sticky="nsew")
-        
-        self.full_creation_btn = customtkinter.CTkButton(self.window, text="Full Creation", fg_color="#144870", hover_color="#08253b", command=self.btn_full_creation)
-        self.full_creation_btn.grid(row=0, column=1, padx=3, pady=20, sticky="nsew")
+        self.full_creation_btn = customtkinter.CTkButton(self.window, text="Full Account Creation", fg_color="#144870", hover_color="#08253b", command=self.btn_full_creation)
+        self.full_creation_btn.grid(row=0, column=0, padx=3, pady=20, sticky="nsew")
         
         self.config_comp_btn = customtkinter.CTkButton(self.window, text="Configure Account", fg_color="#144870", hover_color="#08253b", command=self.btn_config_master)
-        self.config_comp_btn.grid(row=0, column=2, padx=3, pady=20, sticky="nsew")
+        self.config_comp_btn.grid(row=0, column=1, padx=3, pady=20, sticky="nsew")
         
-        self.approve_input_btn = customtkinter.CTkButton(self.window, text="Create|Approve|Publish(INPUT)", fg_color="#144870", hover_color="#08253b", command=self.btn_approve_course_input)
-        self.approve_input_btn.grid(row=1, column=0, padx=3, pady=20, sticky="nsew")
+        self.approve_input_btn = customtkinter.CTkButton(self.window, text="Full Course Creation", fg_color="#144870", hover_color="#08253b", command=self.btn_approve_course_input)
+        self.approve_input_btn.grid(row=0, column=2, padx=3, pady=20, sticky="nsew")
         
         self.delete_course_btn = customtkinter.CTkButton(self.window, text="Delete Course", fg_color="#144870", hover_color="#08253b", command=self.btn_delete_course)
-        self.delete_course_btn.grid(row=1, column=1, padx=3, pady=20, sticky="nsew")
+        self.delete_course_btn.grid(row=1, column=0, padx=3, pady=20, sticky="nsew")
         
         self.dup_course_btn = customtkinter.CTkButton(self.window, text="Duplicate Course", fg_color="#144870", hover_color="#08253b", command=self.btn_duplicate_course)
-        self.dup_course_btn.grid(row=1, column=2, padx=3, pady=20, sticky="nsew")
+        self.dup_course_btn.grid(row=1, column=1, padx=3, pady=20, sticky="nsew")
         
         self.imp_aff_btn = customtkinter.CTkButton(self.window, text="Import Affiliate", fg_color="#144870", hover_color="#08253b", command=self.btn_import_affiliate_list)
-        self.imp_aff_btn.grid(row=2, column=0, padx=3, pady=20, sticky="nsew")
+        self.imp_aff_btn.grid(row=1, column=2, padx=3, pady=20, sticky="nsew")
         
         self.imp_stud_btn = customtkinter.CTkButton(self.window, text="Import Student", fg_color="#144870", hover_color="#08253b", command=self.btn_import_student_list)
-        self.imp_stud_btn.grid(row=2, column=1, padx=3, pady=20, sticky="nsew")
+        self.imp_stud_btn.grid(row=2, column=0, padx=3, pady=20, sticky="nsew")
         
         self.imp_teach_btn = customtkinter.CTkButton(self.window, text="Import Teacher", fg_color="#144870", hover_color="#08253b", command=self.btn_import_teacher_list)
-        self.imp_teach_btn.grid(row=2, column=2, padx=3, pady=20, sticky="nsew")
+        self.imp_teach_btn.grid(row=2, column=1, padx=3, pady=20, sticky="nsew")
         
         self.sub_plan_btn = customtkinter.CTkButton(self.window, text="Create Sub Plan", fg_color="#144870", hover_color="#08253b", command=self.btn_sub_plan_btn)
-        self.sub_plan_btn.grid(row=3, column=0, padx=3, pady=20, sticky="nsew")
+        self.sub_plan_btn.grid(row=2, column=2, padx=3, pady=20, sticky="nsew")
         
         self.category_btn = customtkinter.CTkButton(self.window, text="Create Category", fg_color="#144870", hover_color="#08253b", command=self.btn_create_category)
-        self.category_btn.grid(row=3, column=1, padx=3, pady=20, sticky="nsew")
+        self.category_btn.grid(row=3, column=0, padx=3, pady=20, sticky="nsew")
         
         self.lading_btn = customtkinter.CTkButton(self.window, text="Create Landing Page", fg_color="#144870", hover_color="#08253b", command=self.btn_create_landing)
-        self.lading_btn.grid(row=3, column=2, padx=3, pady=20, sticky="nsew")
+        self.lading_btn.grid(row=3, column=1, padx=3, pady=20, sticky="nsew")
         
         self.lading_btn = customtkinter.CTkButton(self.window, text="Change Payment Method", fg_color="#144870", hover_color="#08253b", command=self.btn_payment_method)
-        self.lading_btn.grid(row=4, column=0, padx=3, pady=20, sticky="nsew")
+        self.lading_btn.grid(row=3, column=2, padx=3, pady=20, sticky="nsew")
         
         self.coupon_btn = customtkinter.CTkButton(self.window, text="Create Coupon", fg_color="#144870", hover_color="#08253b", command=self.btn_create_coupon)
-        self.coupon_btn.grid(row=4, column=1, padx=3, pady=20, sticky="nsew")
+        self.coupon_btn.grid(row=4, column=0, padx=3, pady=20, sticky="nsew")
         
         self.comission_btn = customtkinter.CTkButton(self.window, text="Ajust comission", fg_color="#144870", hover_color="#08253b", command=self.btn_comission)
-        self.comission_btn.grid(row=4, column=2, padx=3, pady=20, sticky="nsew")
+        self.comission_btn.grid(row=4, column=1, padx=3, pady=20, sticky="nsew")
         
         self.class_btn = customtkinter.CTkButton(self.window, text="Create Class", fg_color="#144870", hover_color="#08253b", command=self.btn_class)
-        self.class_btn.grid(row=5, column=0, padx=3, pady=20, sticky="nsew")
+        self.class_btn.grid(row=4, column=2, padx=3, pady=20, sticky="nsew")
         
         self.kit_btn = customtkinter.CTkButton(self.window, text="Add Kit Midia", fg_color="#144870", hover_color="#08253b", command=self.btn_kit_midia)
-        self.kit_btn.grid(row=5, column=1, padx=3, pady=20, sticky="nsew")
+        self.kit_btn.grid(row=5, column=0, padx=3, pady=20, sticky="nsew")
+        
+        self.emblem_btn = customtkinter.CTkButton(self.window, text="Create Emblem", fg_color="#144870", hover_color="#08253b", command=self.btn_create_emblem)
+        self.emblem_btn.grid(row=5, column=1, padx=3, pady=20, sticky="nsew")
+        
+        self.item_btn = customtkinter.CTkButton(self.window, text="Create Item", fg_color="#144870", hover_color="#08253b", command=self.btn_create_item)
+        self.item_btn.grid(row=5, column=2, padx=3, pady=20, sticky="nsew")
     
         # Override the close button
         self.window.protocol("WM_DELETE_WINDOW", self.on_close)    
@@ -79,6 +82,12 @@ class CompanyWindow:
         self.window.destroy()
         
     # COMPANY FUNCITONS
+    def btn_create_item(self):
+        create_item_func()
+        
+    def btn_create_emblem(self):
+        create_emblem_func()
+        
     def btn_kit_midia(self):
         add_kit_midia_func()
         

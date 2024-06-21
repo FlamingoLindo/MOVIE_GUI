@@ -59,12 +59,12 @@ def subscription_plan_func():
     # Open the configurations page
     config_page = wait.until(EC.element_to_be_clickable((By.XPATH, '//*[@id="__next"]/main/div[1]/div[2]/div/div[1]/a')))
     config_page.click()
-
+    
     # Sales subscription button
-    subscription_plan = wait.until(EC.element_to_be_clickable
+    sales_page = wait.until(EC.element_to_be_clickable
                         ((By.XPATH, '//*[@id="__next"]/main/div[2]/div[2]/div/a[2]'))).click()
 
-    new_plan = wait.until(EC.element_to_be_clickable
+    new_sale = wait.until(EC.element_to_be_clickable
                         ((By.XPATH, '//*[@id="__next"]/main/div[2]/div[2]/a'))).click()
 
     plan_amount_str = get_user_input("How many plans?  ")
@@ -96,7 +96,7 @@ def subscription_plan_func():
                                 ((By.XPATH, '//*[@id="__next"]/main/div[2]/form[2]/div/label/div/div/button')
                                     )).click()
 
-        frequency_input = get_user_input("Mensal, Bimestral, Trimestral, Semestral, Anual")
+        frequency_input = get_user_input("Mensal, Bimestral, Trimestral, Semestral, Anual").capitalize()
         frequency = wait.until(EC.element_to_be_clickable
                                 ((By.XPATH, '//*[@id="__next"]/main/div[2]/form[3]/div[1]/div[1]/label/div/div')
                                     )).click()

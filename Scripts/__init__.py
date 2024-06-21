@@ -23,6 +23,8 @@ from Scripts.MOVIE.Master.configs.coupon import create_coupon_func
 from Scripts.MOVIE.Master.configs.comission import affiliate_comission_func
 from Scripts.MOVIE.Master.configs.class_ import create_class_func
 from Scripts.MOVIE.Master.configs.kit_midia import add_kit_midia_func
+from Scripts.MOVIE.Master.configs.create_emblems import create_emblem_func
+from Scripts.MOVIE.Master.configs.create_items import create_item_func
 
 # MOVIE STUDENT
 from Scripts.MOVIE.Student.account.createAccount import create_student_account_func
