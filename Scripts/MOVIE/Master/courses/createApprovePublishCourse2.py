@@ -517,57 +517,349 @@ def create_app_pub_input_func():
         attempts = wait.until(EC.element_to_be_clickable
                             ((By.XPATH, '//*[@id="__next"]/main/div[2]/div[1]/div[3]/div/div/div/label/div/input'))).send_keys(testAttemp)
 
-        # Add test questions
-        choices_test = wait.until(EC.element_to_be_clickable
-                                ((By.XPATH, '//*[@id="__next"]/main/div[2]/div[4]/button[7]/div'))).click()
-
-        testValue1 = get_user_input("Question 1 value (only numbers): ")
-        value = wait.until(EC.element_to_be_clickable
-                        ((By.XPATH, '//*[@id="__next"]/main/div[2]/div[2]/div/input'))).send_keys(testValue1)
+        # Add video?
+        video_choice = get_user_input("Add a video on the test (Y)/(N)?").title()
+        if video_choice == "Y":
+            video_test_amount_str = get_user_input("How many videos?")
+            video_test_amount_int = int(video_test_amount_str)
+            banana = 1
+            for _ in range(video_test_amount_int):
+                video_test = wait.until(EC.element_to_be_clickable
+                                    ((By.XPATH, '//*[@id="__next"]/main/div[2]/div[4]/button[1]/div')
+                                     )).click()
+                
+                video_test_url_input = get_user_input("Video url    ")
+                video_url = wait.until(EC.element_to_be_clickable
+                                    ((By.XPATH, f'//*[@id="__next"]/main/div[2]/div[2]/section[{banana}]/div/div/div/div[2]/input')
+                                     )).send_keys(video_test_url_input)
+                
+                video_search_btn = wait.until(EC.element_to_be_clickable
+                                    ((By.XPATH, f'//*[@id="__next"]/main/div[2]/div[2]/section[{banana}]/div/div/div/div[2]/div/button[2]')
+                                     )).click()
+        else:
+            pass
+               
+        # Add video?
+        text_choice = get_user_input("Add text on the test (Y)/(N)?").title()
+        banana2 = 1
+        if text_choice == "Y":
+            text_test_amount_str = get_user_input("How many text blocks?")
+            text_test_amount_int = int(text_test_amount_str)
+            if text_test_amount_int == 1:
+                test_text_btn = wait.until(EC.element_to_be_clickable
+                                    ((By.XPATH, '//*[@id="__next"]/main/div[2]/div[4]/button[2]/div')
+                                     )).click()
+                
+                test_text_input = get_user_input("Text")
+                test_text = wait.until(EC.element_to_be_clickable
+                                    ((By.XPATH, f'//*[@id="__next"]/main/div[2]/div[2]/section/div/div/div/div[2]/label/textarea')
+                                     )).send_keys(test_text_input)
+                
+            else:
+                for _ in range(text_test_amount_int):
+                    test_text_btn = wait.until(EC.element_to_be_clickable
+                                        ((By.XPATH, '//*[@id="__next"]/main/div[2]/div[4]/button[2]/div')
+                                        )).click()
+                    
+                    test_text_input = get_user_input("Text")
+                    test_text = wait.until(EC.element_to_be_clickable
+                                        ((By.XPATH, f'//*[@id="__next"]/main/div[2]/div[2]/section[{banana2}]/div/div/div/div[2]/label/textarea')
+                                        )).send_keys(test_text_input)
+                    banana += 1
+        else:
+            pass
         
-        testChoiceName = get_user_input("Choices question name: ")
-        choices_test_title = wait.until(EC.element_to_be_clickable
-                                        ((By.XPATH, '//*[@id="__next"]/main/div[2]/div[2]/section/div/div/div/div[1]/label/div/input'))).send_keys(testChoiceName)
+        # Add image?
+        image_choice = get_user_input("Add image on the test (Y)/(N)?").title()
+        banana3 = 1
+        if image_choice == "Y":
+            image_test_amount_str = get_user_input("How many images?")
+            image_test_amount_int = int(image_test_amount_str)
+            if image_test_amount_int == 1:
+                image_test_btn = wait.until(EC.element_to_be_clickable
+                                    ((By.XPATH, '//*[@id="__next"]/main/div[2]/div[4]/button[3]/div')
+                                     )).click()
+                
+                image_test_path = get_user_input("Image url")
+                image_test = wait.until(EC.element_to_be_clickable
+                                    ((By.XPATH, '//*[@id="__next"]/main/div[2]/div[2]/section/div/div/div/div[2]/input')
+                                     )).send_keys(image_test_path)
+                
+                image_test_search = wait.until(EC.element_to_be_clickable
+                                    ((By.XPATH, '//*[@id="__next"]/main/div[2]/div[2]/section/div/div/div/div[2]/div/button[2]')
+                                     )).click()
+            else:
+                for _ in range(image_test_amount_int):
+                    image_test_btn = wait.until(EC.element_to_be_clickable
+                                        ((By.XPATH, '//*[@id="__next"]/main/div[2]/div[4]/button[3]/div')
+                                        )).click()
+                    
+                    image_test_path = get_user_input("Image url")
+                    image_test = wait.until(EC.element_to_be_clickable
+                                        ((By.XPATH, f'//*[@id="__next"]/main/div[2]/div[2]/section[{banana3}]/div/div/div/div[2]/input')
+                                        )).send_keys(image_test_path)
+                    
+                    image_test_search = wait.until(EC.element_to_be_clickable
+                                        ((By.XPATH, f'//*[@id="__next"]/main/div[2]/div[2]/section[{banana3}]/div/div/div/div[2]/div/button[2]')
+                                        )).click()
+        else:
+            pass
         
-        add_choices = wait.until(EC.element_to_be_clickable
-                                ((By.XPATH, '//*[@id="__next"]/main/div[2]/div[2]/section/div/div/div/button')))
-        add_choices.click()
-        add_choices.click()
+        # Add audio?
+        audio_choice = get_user_input("Add audio (Y)/(N)?").title()
+        banana4 = 1
+        if audio_choice == "Y":
+            audio_test_str = get_user_input("How many audios?")
+            audio_test_int = int(audio_test_str)
+            if audio_test_int == 1:
+                audio_test_btn = wait.until(EC.element_to_be_clickable
+                                    ((By.XPATH, '//*[@id="__next"]/main/div[2]/div[4]/button[4]/div')
+                                     )).click()
+                
+                audio_test_path = get_user_input("Audio path")
+                audio_test = wait.until(EC.element_to_be_clickable
+                                    ((By.XPATH, '//*[@id="__next"]/main/div[2]/div[2]/section/div/div/div/div[2]/input')
+                                     )).send_keys("a")
+                pyautogui.press('tab')
+                pyautogui.press('tab')
+                pyautogui.press('tab')
+                pyautogui.press('enter')
+                time.sleep(1.3)
+                pyautogui.write(audio_test_path)
+                pyautogui.press('enter')
+            else:
+                for _ in range(audio_test_int):
+                    audio_test_btn = wait.until(EC.element_to_be_clickable
+                                        ((By.XPATH, '//*[@id="__next"]/main/div[2]/div[4]/button[4]/div')
+                                        )).click()
+                    
+                    audio_test_path = get_user_input("Audio path")
+                    audio_test = wait.until(EC.element_to_be_clickable
+                                        ((By.XPATH, f'//*[@id="__next"]/main/div[2]/div[2]/section[{banana4}]/div/div/div/div[2]/input')
+                                        )).send_keys("a")
+                    pyautogui.press('tab')
+                    pyautogui.press('tab')
+                    pyautogui.press('tab')
+                    pyautogui.press('enter')
+                    time.sleep(1.3)
+                    pyautogui.write(audio_test_path)
+                    pyautogui.press('enter')
+                    
+                    banana4 += 1
+        else:
+            pass
+                
+        # Add file?
+        file_choice = get_user_input("Add file (Y)/(N)?").title()
+        if file_choice == "Y":
+            file_test_amount_str = get_user_input("How many files?")
+            file_test_amount_int = int(file_test_amount_str)
+            banana5 = 1
+            if file_test_amount_int == 1:
+                file_test_btn = wait.until(EC.element_to_be_clickable
+                                ((By.XPATH, '//*[@id="__next"]/main/div[2]/div[4]/button[5]/div')
+                                 )).click()
+                
+                file_test_path = get_user_input("File path")
+                file_test = wait.until(EC.element_to_be_clickable
+                                ((By.XPATH, '//*[@id="__next"]/main/div[2]/div[2]/section/div/div/div/div[2]/input')
+                                 )).send_keys("a")
+                
+                pyautogui.press('tab')
+                pyautogui.press('tab')
+                pyautogui.press('tab')
+                pyautogui.press('enter')
+                time.sleep(1.3)
+                pyautogui.write(file_test_path)
+                pyautogui.press('enter')
+            else:
+                for _ in range(file_test_amount_int):
+                    file_test_btn = wait.until(EC.element_to_be_clickable
+                                    ((By.XPATH, '//*[@id="__next"]/main/div[2]/div[4]/button[5]/div')
+                                    )).click()
+                    
+                    file_test_path = get_user_input("File path")
+                    file_test = wait.until(EC.element_to_be_clickable
+                                    ((By.XPATH, f'//*[@id="__next"]/main/div[2]/div[2]/section[{banana5}]/div/div/div/div[2]/input')
+                                    )).send_keys("a")
+                    
+                    pyautogui.press('tab')
+                    pyautogui.press('tab')
+                    pyautogui.press('tab')
+                    pyautogui.press('enter')
+                    time.sleep(1.3)
+                    pyautogui.write(file_test_path)
+                    pyautogui.press('enter')
+                    
+                    banana5 += 1
+        else:
+            pass
+           
+        # Add code?
+        code_choice = get_user_input("Add code block (Y)/(N)?").title()
+        if code_choice == "Y":
+            code_test_amount_str = get_user_input("How many code block?")
+            code_test_amount_int = int(code_test_amount_str)
+            banana6 = 1
+            if code_test_amount_int == 1:
+                code_test_btn = wait.until(EC.element_to_be_clickable
+                                ((By.XPATH, '//*[@id="__next"]/main/div[2]/div[4]/button[6]/div')
+                                 )).click()
+                
+                code_test_title = wait.until(EC.element_to_be_clickable
+                                ((By.XPATH, '//*[@id="__next"]/main/div[2]/div[2]/section/div/div/div/div[1]/label/div/input')
+                                 )).send_keys('Code')
+                
+                pyautogui.press('tab')
+                pyautogui.press('tab')
+                pyautogui.press('tab')
+                
+                code_test_input = get_user_input("Code text")
+                pyautogui.write(code_test_input)
+            else:
+                for _ in range(code_test_amount_int):
+                    code_test_btn = wait.until(EC.element_to_be_clickable
+                                    ((By.XPATH, '//*[@id="__next"]/main/div[2]/div[4]/button[6]/div')
+                                    )).click()
+                    
+                    code_test_title = wait.until(EC.element_to_be_clickable
+                                    ((By.XPATH, f'//*[@id="__next"]/main/div[2]/div[2]/section[{banana6}]/div/div/div/div[1]/label/div/input')
+                                    )).send_keys(f'Code {banana6}')
+                    
+                    pyautogui.press('tab')
+                    pyautogui.press('tab')
+                    pyautogui.press('tab')
+                    
+                    code_test_input = get_user_input("Code text")
+                    pyautogui.write(code_test_input)
+                    
+                    banana6 += 1
+        else:
+            pass
+                                  
+        # Add choices?
+        choices_choice = get_user_input("Add chooices question (Y)/(N)?").title()
+        banana7 = 1 
+        if choices_choice == "Y":
+            choices_teste_btn = wait.until(EC.element_to_be_clickable
+                                ((By.XPATH, '//*[@id="__next"]/main/div[2]/div[4]/button[7]/div')
+                                 )).click()
+            
+            choices_points = get_user_input("How many points?")
+            choices_points_type = wait.until(EC.element_to_be_clickable
+                                ((By.XPATH, '//*[@id="__next"]/main/div[2]/div[2]/div/input')
+                                 )).click()
+            pyautogui.write(choices_points)
+            
+            choices_title = wait.until(EC.element_to_be_clickable
+                                ((By.XPATH, '//*[@id="__next"]/main/div[2]/div[2]/section[2]/div/div/div/div[1]/label/div/input')
+                                 )).send_keys("Choices")
+            
+            choices_amount_str = get_user_input("How many choices")
+            choices_amount_int = int(choices_amount_str)
+            for _ in range(choices_amount_int):
+                add_choice = wait.until(EC.element_to_be_clickable
+                                ((By.XPATH, '//*[@id="__next"]/main/div[2]/div[2]/section/div/div/div/button')
+                                 )).click() 
+                
+                choices_title_input = get_user_input("Title")
+                choice_title = wait.until(EC.element_to_be_clickable
+                                ((By.XPATH, f'//*[@id="__next"]/main/div[2]/div[2]/section/div/div/div/div[2]/ul/li[{banana7}]/input')
+                                 )).send_keys(choices_title_input) 
+                
+                banana7 += 1
+            
+            right = get_user_input('Which option is correct (1,2,3,...)')     
+            right_click = wait.until(EC.element_to_be_clickable
+                                ((By.XPATH, f'//*[@id="__next"]/main/div[2]/div[2]/section/div/div/div/div[2]/ul/li[{right}]/div[2]/label[1]/div')
+                                )).click()      
+        else:
+            pass
         
-        testChoice1 = get_user_input("Choice 1 (right): ")
-        right = wait.until(EC.element_to_be_clickable
-                        ((By.XPATH, '//*[@id="__next"]/main/div[2]/div[2]/section/div/div/div/div[2]/ul/li[1]/input'))).send_keys(testChoice1)
-        
-        testChoice2 = get_user_input("Choice 2 (wrong):")
-        
-        wrong = wait.until(EC.element_to_be_clickable
-                        ((By.XPATH, '//*[@id="__next"]/main/div[2]/div[2]/section/div/div/div/div[2]/ul/li[2]/input'))).send_keys(testChoice2)
-        
-        is_right = wait.until(EC.element_to_be_clickable
-                            ((By.XPATH, '//*[@id="__next"]/main/div[2]/div[2]/section/div/div/div/div[2]/ul/li[1]/div[2]/label[1]/div'))).click()
-
-        dissertative_test = wait.until(EC.element_to_be_clickable
-                                    ((By.XPATH, '//*[@id="__next"]/main/div[2]/div[4]/button[8]/div'))).click()
-
-        testValue2 = get_user_input("Question 2 value (only numbers): ")
-        value2 = wait.until(EC.element_to_be_clickable
-                            ((By.XPATH, '//*[@id="__next"]/main/div[2]/div[2]/div[2]/input'))).send_keys(testValue2)
-        
-        testDiss = get_user_input("Test dissertative text: ")
-        dissertative_test_question = wait.until(EC.element_to_be_clickable
-                                                ((By.XPATH, '//*[@id="__next"]/main/div[2]/div[2]/section[2]/div/div/div/div[2]/label/textarea'))).send_keys(testDiss)
-        
-        essay_test = wait.until(EC.element_to_be_clickable
-                                ((By.XPATH, '//*[@id="__next"]/main/div[2]/div[4]/button[9]/div'))).click()
-
-        testValue3 = get_user_input("Question 3 value (only numbers): ")
-        value3 = wait.until(EC.element_to_be_clickable
-                            ((By.XPATH, '//*[@id="__next"]/main/div[2]/div[2]/div[3]/input'))).send_keys(testValue3)
-
-        testEssText = get_user_input("Test essay text: ")
-        essay_test_question = wait.until(EC.element_to_be_clickable
-                                        ((By.XPATH, '//*[@id="__next"]/main/div[2]/div[2]/section[3]/div/div/div/div[1]/label/div/input'))).send_keys(testEssText)
-        
+        # Add dissertative?
+        dissertative_choice = get_user_input("Add dissertative question (Y)/(N)?").title()
+        banana8 = 1 
+        if dissertative_choice == "Y":
+            diss_test_amount_str = get_user_input("How many dissertative questions?")
+            diss_test_amount_int = int(diss_test_amount_str)
+            if diss_test_amount_int == 1:
+                diss_btn = wait.until(EC.element_to_be_clickable
+                                    ((By.XPATH, '//*[@id="__next"]/main/div[2]/div[4]/button[8]/div')
+                                    )).click()
+                
+                diss_point_input = get_user_input("How many points?")
+                diss_point = wait.until(EC.element_to_be_clickable
+                                    ((By.XPATH, '//*[@id="__next"]/main/div[2]/div[2]/div/input')
+                                    )).click()
+                pyautogui.write(diss_point_input)
+                
+                diss_test_text_input = get_user_input("Dissertative text")
+                diss_test = wait.until(EC.element_to_be_clickable
+                                    ((By.XPATH, '//*[@id="__next"]/main/div[2]/div[2]/section[3]/div/div/div/div[2]/label/textarea')
+                                    )).send_keys(diss_test_text_input)
+            else:
+                for _ in range(diss_test_amount_int):
+                    diss_btn = wait.until(EC.element_to_be_clickable
+                                        ((By.XPATH, '//*[@id="__next"]/main/div[2]/div[4]/button[8]/div')
+                                        )).click()
+                    
+                    diss_point_input = get_user_input("How many points?")
+                    diss_point = wait.until(EC.element_to_be_clickable
+                                        ((By.XPATH, f'//*[@id="__next"]/main/div[2]/div[2]/div[{banana8}]/input')
+                                        )).click()
+                    pyautogui.write(diss_point_input)
+                    
+                    diss_test_text_input = get_user_input("Dissertative text")
+                    diss_test = wait.until(EC.element_to_be_clickable
+                                        ((By.XPATH, f'//*[@id="__next"]/main/div[2]/div[2]/section[{banana8}]/div/div/div/div[2]/label/textarea')
+                                        )).send_keys(diss_test_text_input)
+                    
+                    banana8 += 1
+        else:
+            pass
+                
+        # Add Essay?
+        essay_choice = get_user_input("Add essay (Y)/(N)?").title()
+        if essay_choice == "Y":
+            essay_test_amount_str = get_user_input("How many essay block?")
+            essay_test_amount_int = int(essay_test_amount_str)
+            banana9 = 1
+            if essay_test_amount_int == 1:
+                essa_test_btn = wait.until(EC.element_to_be_clickable
+                                    ((By.XPATH, '//*[@id="__next"]/main/div[2]/div[4]/button[9]/div')
+                                    )).click()
+                
+                ess_point_input = get_user_input("How many points?")
+                ess_point = wait.until(EC.element_to_be_clickable
+                                    ((By.XPATH, '//*[@id="__next"]/main/div[2]/div[2]/div/input')
+                                    )).click()
+                pyautogui.write(ess_point_input)
+                
+                ess_test_text_input = get_user_input("Dissertative text")
+                ess_test = wait.until(EC.element_to_be_clickable
+                                    ((By.XPATH, '//*[@id="__next"]/main/div[2]/div[2]/section/div/div/div/div[1]/label/div/input')
+                                    )).send_keys(ess_test_text_input)
+            else:   
+                for _ in range(essay_test_amount_int):
+                    essa_test_btn = wait.until(EC.element_to_be_clickable
+                                        ((By.XPATH, '//*[@id="__next"]/main/div[2]/div[4]/button[9]/div')
+                                        )).click()
+                    
+                    ess_point_input = get_user_input("How many points?")
+                    ess_point = wait.until(EC.element_to_be_clickable
+                                        ((By.XPATH, f'//*[@id="__next"]/main/div[2]/div[2]/div[{banana9}]/input')
+                                        )).click()
+                    pyautogui.write(ess_point_input)
+                    
+                    ess_test_text_input = get_user_input("Dissertative text")
+                    ess_test = wait.until(EC.element_to_be_clickable
+                                        ((By.XPATH, f'//*[@id="__next"]/main/div[2]/div[2]/section[{banana9}]/div/div/div/div[3]/label/textarea')
+                                        )).send_keys(ess_test_text_input)
+                    
+                    banana9 += 1
+        else:
+            pass
+               
         # Finish test creation
         finish_test = wait.until(EC.element_to_be_clickable
                                 ((By.XPATH, '//*[@id="__next"]/main/header/button/img'))).click()

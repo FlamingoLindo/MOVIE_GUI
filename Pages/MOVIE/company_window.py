@@ -9,7 +9,7 @@ class CompanyWindow:
         self.on_close_callback = on_close_callback
         self.window = CTkToplevel(master)
         self.window.title("Company Window")
-        self.window.geometry("500x500")
+        self.window.geometry("455x420")
         
         if hasattr(sys, '_MEIPASS'):
             base_path = sys._MEIPASS
