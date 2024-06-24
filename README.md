@@ -2,7 +2,7 @@
 2. EXTRACT THE CONTENT SOMEWHERE IN YOUR PC
 3. OPEN THE PROJECT FOLDER
 4. OPEN THE FOLDER NAMED 'dist'
-5. EXECUTE THE main.exe
+5. EXECUTE main.exe
 
 ![buh](https://github.com/FlamingoLindo/MOVIE_GUI/assets/101421364/ac28ee4d-4ab2-4706-9bb7-18459fddaa57)
 
